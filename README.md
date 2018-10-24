@@ -1,0 +1,1 @@
+This is one of my first javascript projects. That i wrote the whole code with out editing an already existing project. It just lets you enter recipes and adds them to a list.
