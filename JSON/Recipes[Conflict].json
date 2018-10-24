@@ -1,0 +1,80 @@
+{
+  "name": "Recipes",
+  "recipes": [{
+    "name": "Hot_Chocolate",
+    "ingredients": [{
+        "name": "Chocolate Syrup",
+        "qty": 2,
+        "unit": "floz"
+      },
+      {
+        "name": "Whole Milk",
+        "qty": 6,
+        "unit": "floz"
+      },
+      {
+        "name": "Cocoa Powder",
+        "qty": 1,
+        "unit": "tbsp"
+      }, {
+        "name": "Dark Chocolate",
+        "qty": 2,
+        "unit": "oz"
+      }
+    ]
+  }, {
+    "name": "Mushroom Risotto",
+    "ingredients": [{
+        "name": "Arborio Rice",
+        "qty": 2,
+        "unit": "cups"
+      },
+      {
+        "name": "Dried Mushrooms",
+        "qty": 1,
+        "unit": "oz"
+      },
+      {
+        "name": "Chicken Stock",
+        "qty": 3,
+        "unit": "cups"
+      }, {
+        "name": "Shallots",
+        "qty": 2,
+        "unit": "oz"
+      }, {
+        "name": "Reisling",
+        "qty": 2,
+        "unit": "floz"
+      }, {
+        "name": "Thyme",
+        "qty": 1,
+        "unit": "tbsp"
+      }
+    ]
+  }, {
+    "name": "Basic Risotto",
+    "ingredients": [{
+      "name": "Arborio Rice",
+      "qty": 2,
+      "unit": "cups"
+    }, {
+      "name": "Chicken Stock",
+      "qty": 3,
+      "unit": "cups"
+    }, {
+      "name": "Shallots",
+      "qty": 2,
+      "unit": "oz"
+    }, {
+      "name": "Reisling",
+      "qty": 2,
+      "unit": "floz"
+    }, {
+      "name": "Thyme",
+      "qty": 1,
+      "unit": "tbsp"
+    }]
+  }]
+
+}

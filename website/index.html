@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">-->
+  <link rel="stylesheet" href="css/style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="recipe">
+    <h1>Title</h1>
+    <form>
+      <input placeholder="Recipes" list="selRec" id="selectRecipe" name="recSelect" />
+      <label for="recSelect">Servings:</label>
+      <datalist id="selRec"></datalist>
+      <input value="1" type="number" id="serveInput" name="serveInput" placeholder="1" min="0" step="1">
+    </form>
+    <table id="ingTable">
+      <thead>
+        <tr id="topper">
+          <th width="5%">#</th>
+          <th width="50%">Ingredient</th>
+          <th width="7%">Quantity</th>
+          <th width="10%"></th>
+
+        </tr>
+      </thead>
+      <tbody id="ingTbl">
+        <tr>
+          <th colspan=4 id="blankholder">Select a Recipe</th>
+        </tr>
+      </tbody>
+    </table>
+
+    <form>
+      <button type="button" class="addIng" id="addbtn" onclick="addRow">+</button>
+      <input placeholder="Select an Ingredient" list="mstrIngs" id="ingInput" name="ingInput" />
+      <datalist id="mstrIngs"></datalist>
+      <input type="number" id="qtyInput" name="qtyInput" placeholder="Qty" min="0" step="0.25">
+      <select name="Units" id="unitInput">
+        <option value="" disabled selected>Units</option>
+        <option value="oz">oz</option>
+        <option value="floz">floz</option>
+        <option value="each">each</option>
+        <option value="tea">tea</option>
+        <option value="tsp">tbsp</option>
+        <option value="cup">cup</option>
+      </select>
+      <button type="button" id="addList">Add to list</button>
+      <button type="button" id="addJSON">Add to Recipebook</button>
+
+    </form>
+  </div>
+  <div>
+    <hr>
+  </div>
+  <br>
+
+  <div id="recipe">
+    <table id="masterTbl">
+      <thead>
+        <tr id="topper">
+          <th width="5%"></th>
+          <th width="50%">Ingredient</th>
+          <th width="7%">Quantity</th>
+          <th width="10%"></th>
+        </tr>
+      </thead>
+      <tbody id="mstrTbl">
+        <tr>
+          <th colspan=4 id="blankholder2">Select a Recipe</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+<footer>
+  <script src="js/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="node_modules/src/stringify.js"></script>
+</footer>
+
+</html>
