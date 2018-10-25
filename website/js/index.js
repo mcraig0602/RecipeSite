@@ -1,9 +1,10 @@
 document.getElementById("addbtn").addEventListener("click", addRow);
 document.getElementById("addbtn").addEventListener("click", rmvRow);
-let ingsQty = []
+let ingsQty = [];
 
 $("#selectRecipe").change(function (e) {
   let item = e.currentTarget.value
+  item = item.replace(" ", "_")
   document.getElementById('blankholder').style.visibility = "hidden";
   document.getElementById('blankholder').style.position = "absolute";
   clearIngs();
@@ -16,11 +17,11 @@ $("#selectRecipe").change(function (e) {
 });
 
 $(document).ready(function (e) {
-    //Get Recipes
+  //Get Recipes
   $.getJSON("all/recipes", (result) => {
     for (i = 0; i < result.recipe.length; i++) {
       let sel = document.createElement('option');
-      sel.setAttribute('value', result.recipe[i]);
+      sel.setAttribute('value', result.recipe[i].replace("_", " "));
       document.getElementById('selRec').appendChild(sel);
     }
   })
@@ -47,7 +48,7 @@ function loadRecipe(nameJSON, qtyJSON, unitJSON, ingTblCt) {
   qty.innerText = qtyJSON + ' ' + unitJSON;
   //Ingredient//
   var ing = document.createElement('td');
-  ing.innerText = nameJSON;
+  ing.innerHTML = nameJSON;
   //Row Number//
   var rowNum = document.createElement('th');
   rowNum.innerText = ingTblCt;
@@ -60,6 +61,7 @@ function loadRecipe(nameJSON, qtyJSON, unitJSON, ingTblCt) {
   ingredient.appendChild(qty);
   ingredient.appendChild(rmvIngP);
   ingTbl.appendChild(ingredient);
+  ingsQty.push(qtyJSON);
 }
 
 function addRow() {
@@ -99,6 +101,7 @@ function addRow() {
     ingredient.appendChild(qty);
     ingredient.appendChild(rmvIngP);
     ingTbl.appendChild(ingredient);
+    ingsQty.push(qtyRow)
   }
 }
 
@@ -108,8 +111,9 @@ function rmvRow(cls) {
     document.getElementById('ingTable').deleteRow(delRowI);
     var ingTbl = document.getElementById('ingTbl');
     var ingTblCt = ingTbl.childElementCount;
-    for (i = 0; i < ingTblCt; i++) {
-      ingTbl.children[i].children[0].innerText = i + 1;
+    ingsQty.splice(delRowI - 2, 1);
+    for (i = 1; i < ingTblCt; i++) {
+      ingTbl.children[i].children[0].innerText = i;
     }
   }
 }
@@ -130,6 +134,7 @@ function rmvRow2(cls) {
 }
 
 function clearIngs() {
+  ingsQty = [];
   ings = $("#ingredient").length;
   while (document.getElementById("ingredient") !== null) {
     document.getElementById("ingredient").remove();
@@ -156,6 +161,7 @@ function addMastRow(ingr, qtyI, unit) {
   //Quantity//
   var qty = document.createElement('td');
   qty.innerText = String(qtyI) + " " + unit;
+  qty.setAttribute('id', 'qty')
   //Ingredient//
   var ing = document.createElement('td');
   ing.innerText = String(ingr);
@@ -193,7 +199,6 @@ $('#addJSON').click(() => {
     addJSON.ingredients = addIngs;
     //addJSON.stringify(tempJSON);
     result.recipes.push(addJSON);
-    console.log(result)
   })
 })
 
@@ -219,7 +224,6 @@ $("#addList").click(
       currentUnit.push(unit);
       currentIngs.push(mstrIngs);
     }
-    console.log(currentIngs)
     for (i = 1; i < ings; i++) {
       if (currentIngs.indexOf(document.getElementById('ingTbl').children[i].childNodes[1].childNodes[0].data) !== -1) {
         let qty = document.getElementById('ingTbl').children[i].childNodes[2].childNodes[0].data.split(" ")
@@ -248,8 +252,8 @@ $("#serveInput").change(function (e) {
   let serves = document.getElementById('serveInput').value;
   for (i = 1; i <= ingsQty.length; i++) {
     let qty = document.getElementById('ingTbl').children[i].childNodes[2].childNodes[0].data.split(" ")
-    qty[0] = parseInt(ingsQty[i - 1]) * parseInt(serves)
+    qty[0] = parseFloat(ingsQty[i - 1]) * parseFloat(serves)
     let upQty = String(qty[0]) + " " + String(qty[1])
     document.getElementById('ingTbl').children[i].childNodes[2].childNodes[0].data = upQty;
   }
-})
+});

@@ -1,6 +1,5 @@
 let fs = require('fs');
 let recipes = JSON.parse(fs.readFileSync('JSON/Recipes.json'));
-console.log('Server is started!!!');
 
 let express = require('express');
 let bodyParser = require('body-parser');
@@ -57,7 +56,6 @@ function allIngs(request, response) {
       filtIngs.push(ings[k]);
     }
   }
-
 
   reply = {
     status: "complete",
