@@ -35,6 +35,31 @@ $(document).ready(function (e) {
   })
 });
 
+function addRecipe() {
+  let data = {};
+  let ings = [];
+  let tbl = document.getElementById('ingTbl');
+  let rec = document.getElementsByName('recSelect');
+  data.name = rec[0].value
+  for (i = 1; i < tbl.children.length; i++) {
+    let indIng = {};
+    indIng.name = tbl.children[i].children[1].innerText;
+    let qtyUnit = tbl.children[i].children[2].innerText.split(" ");
+    indIng.qty = parseFloat(qtyUnit[0]);
+    indIng.unit = qtyUnit[1];
+    ings.push(indIng);
+  }
+  data.ingredients = ings
+  console.log(data);
+  $.ajax({
+    type: "POST",
+    url: 'add/',
+    data: data,
+    success: console.log('We did it!'),
+    dataType: 'JSON'
+  });
+}
+
 function loadRecipe(nameJSON, qtyJSON, unitJSON, ingTblCt) {
   var rmvIng = document.createElement('button');
   rmvIng.setAttribute('type', 'button');

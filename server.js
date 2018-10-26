@@ -63,6 +63,20 @@ function allIngs(request, response) {
   }
   response.send(reply);
 }
+app.post('/add', addRecipe);
+
+function addRecipe(req, res) {
+  data = JSON.parse(req.body);
+  recipes.recipes.push(data);
+  let recipeData = JSON.stringify(recipes, null, 2);
+  console.log(recipeData);
+  fs.writeFile('Recipes.json', recipeData, (err) => {
+    if (err) throw err;
+  })
+  console.log(recipeData);
+  res.send(data);
+}
+
 app.get('/search/:recipe', searchRecipes);
 
 function searchRecipes(request, response) {
