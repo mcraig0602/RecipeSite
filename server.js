@@ -66,14 +66,17 @@ function allIngs(request, response) {
 app.post('/add', addRecipe);
 
 function addRecipe(req, res) {
-  data = JSON.parse(req.body);
+  data = JSON.stringify(req.body, null, 2);
+  console.log(data);
+  data = JSON.parse(data);
+  console.log(data);
   recipes.recipes.push(data);
   let recipeData = JSON.stringify(recipes, null, 2);
-  console.log(recipeData);
+  //console.log(recipeData);
   fs.writeFile('Recipes.json', recipeData, (err) => {
     if (err) throw err;
   })
-  console.log(recipeData);
+  //console.log(recipeData);
   res.send(data);
 }
 

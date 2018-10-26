@@ -40,16 +40,19 @@ function addRecipe() {
   let ings = [];
   let tbl = document.getElementById('ingTbl');
   let rec = document.getElementsByName('recSelect');
-  data.name = rec[0].value
+  //data.name = rec[0].value
   for (i = 1; i < tbl.children.length; i++) {
     let indIng = {};
-    indIng.name = tbl.children[i].children[1].innerText;
+    let name = tbl.children[i].children[1].innerText;
     let qtyUnit = tbl.children[i].children[2].innerText.split(" ");
-    indIng.qty = parseFloat(qtyUnit[0]);
-    indIng.unit = qtyUnit[1];
+    let qty = parseFloat(qtyUnit[0]);
+    let unit = qtyUnit[1];
+    indIng.name = (name.substr(0,name.length-1));
+    indIng.qty = qty;
+    indIng.unit = unit.substr(0,unit.length-1);
     ings.push(indIng);
   }
-  data.ingredients = ings
+  data.ingredients = ings;
   console.log(data);
   $.ajax({
     type: "POST",

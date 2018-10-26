@@ -92,10 +92,24 @@
       ]
     },
     {
-      "name": "Special Risotto",
-      "ingredients[0][name]": "Chicken Stock",
-      "ingredients[0][qty]": "5",
-      "ingredients[0][unit]": "cup"
+      "ingredients[0][name]": "Arborio Rice",
+      "ingredients[0][qty]": "2",
+      "ingredients[0][unit]": "cups",
+      "ingredients[1][name]": "Dried Mushrooms",
+      "ingredients[1][qty]": "1",
+      "ingredients[1][unit]": "oz",
+      "ingredients[2][name]": "Chicken Stock",
+      "ingredients[2][qty]": "3",
+      "ingredients[2][unit]": "cups",
+      "ingredients[3][name]": "Shallots",
+      "ingredients[3][qty]": "2",
+      "ingredients[3][unit]": "oz",
+      "ingredients[4][name]": "Reisling",
+      "ingredients[4][qty]": "2",
+      "ingredients[4][unit]": "floz",
+      "ingredients[5][name]": "Thyme",
+      "ingredients[5][qty]": "1",
+      "ingredients[5][unit]": "tbsp"
     }
   ]
 }
