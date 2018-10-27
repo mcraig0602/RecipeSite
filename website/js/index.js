@@ -47,17 +47,20 @@ function addRecipe() {
     let qtyUnit = tbl.children[i].children[2].innerText.split(" ");
     let qty = parseFloat(qtyUnit[0]);
     let unit = qtyUnit[1];
-    indIng.name = (name.substr(0,name.length-1));
+    indIng.name = name;
     indIng.qty = qty;
-    indIng.unit = unit.substr(0,unit.length-1);
+    indIng.unit = unit;
     ings.push(indIng);
   }
-  data.ingredients = ings;
-  console.log(data);
+  //data.ingredients = ings;
+  //delete data.prototype.toJSON
+
+  console.log(ings);
   $.ajax({
     type: "POST",
     url: 'add/',
-    data: data,
+    //data: JSON.stringify(ings),
+    data: ings,
     success: console.log('We did it!'),
     dataType: 'JSON'
   });
