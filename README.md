@@ -1,7 +1,7 @@
 This is one of my first javascript projects. That i wrote the whole code with out editing an already existing project. It just lets you enter recipes and adds them to a list.
 
 Completed:
--Fix displayed values on ingredients
+-Add new recipe is partially fixed, but issues with the datalist for ingredients and recipes is glitchy.
 
 Upcoming updates:
 -Add recipes to master list with servings

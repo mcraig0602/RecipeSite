@@ -8,6 +8,7 @@ $("#selectRecipe").change(function (e) {
   document.getElementById('blankholder').style.visibility = "hidden";
   document.getElementById('blankholder').style.position = "absolute";
   clearIngs();
+
   $.getJSON("search/" + item, (result) => {
     ings = result.ingredients;
     for (i = 0; i < ings.length; i++) {
@@ -35,36 +36,27 @@ $(document).ready(function (e) {
   })
 });
 
-function addRecipe() {
-  let data = {};
-  let ings = [];
+$('#addJSON').click(() => {
+  let ingredients = {};
   let tbl = document.getElementById('ingTbl');
   let rec = document.getElementsByName('recSelect');
-  //data.name = rec[0].value
+  ingredients.name = rec[0].value.replace(" ", "_")
   for (i = 1; i < tbl.children.length; i++) {
-    let indIng = {};
-    let name = tbl.children[i].children[1].innerText;
+    let indIng = [];
+    indIng[0] = tbl.children[i].children[1].innerText;
     let qtyUnit = tbl.children[i].children[2].innerText.split(" ");
-    let qty = parseFloat(qtyUnit[0]);
-    let unit = qtyUnit[1];
-    indIng.name = name;
-    indIng.qty = qty;
-    indIng.unit = unit;
-    ings.push(indIng);
+    indIng[1] = parseFloat(qtyUnit[0]);
+    indIng[2] = qtyUnit[1];
+    ingredients["ingredient" + i] = indIng;
   }
-  //data.ingredients = ings;
-  //delete data.prototype.toJSON
-
-  console.log(ings);
   $.ajax({
     type: "POST",
     url: 'add/',
-    //data: JSON.stringify(ings),
-    data: ings,
+    data: ingredients,
     success: console.log('We did it!'),
-    dataType: 'JSON'
+    dataType: 'application/JSON'
   });
-}
+})
 
 function loadRecipe(nameJSON, qtyJSON, unitJSON, ingTblCt) {
   var rmvIng = document.createElement('button');

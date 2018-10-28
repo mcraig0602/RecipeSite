@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 app.use(bodyParser.json())
+let jsonParser = bodyParser.json();
 app.use(cors());
 
 app.get('/all', getAll)
@@ -38,7 +39,6 @@ function allRecs(request, response) {
   }
   response.send(reply);
 }
-
 app.get('/all/ingredients', allIngs);
 
 function allIngs(request, response) {
@@ -63,23 +63,44 @@ function allIngs(request, response) {
   }
   response.send(reply);
 }
-app.post('/add/', addRecipe);
+app.post('/add/', jsonParser, addRecipe);
 
 function addRecipe(req, res) {
   data = req.body;
-  //console.log(data);
-  //data = JSON.parse(data);
-  console.log(data);
-  recipes.recipes.push({
-    "ingredients": data
-  });
-  let recipeData = recipes;
-  //console.log(recipeData);
-  fs.writeFile('Recipes.json', JSON.stringify(recipeData), (err) => {
-    if (err) throw err;
-  })
-  //console.log(recipeData);
-  res.send(data);
+  let dup = false;
+  for (i = 0; i < recipes.recipes.length; i++)
+    if (recipes.recipes[i].name.indexOf(data.name) == -1) dup = true;
+
+  if (!dup) {
+    ingredients = []
+    for (p in data) {
+      ing = {}
+      if (p !== "name") {
+        ing.name = data[p][0]
+        ing.qty = data[p][1]
+        ing.unit = data[p][2]
+        ingredients.push(ing);
+      }
+    }
+    recipes.recipes.push({
+      name: data.name,
+      ingredients: ingredients
+    })
+    let reply = {
+      msg: "Success",
+      name: data.name
+    }
+    fs.writeFile('Recipes.json', JSON.stringify(recipes, null, 2), (err) => {
+      if (err) throw err;
+    })
+    res.send(reply);
+  } else {
+    reply = {
+      msg: "Duplicate Entry",
+      name: data.name
+    }
+    res.send(reply);
+  }
 }
 
 app.get('/search/:recipe', searchRecipes);
