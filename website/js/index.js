@@ -2,19 +2,41 @@ document.getElementById("addbtn").addEventListener("click", addRow);
 document.getElementById("addbtn").addEventListener("click", rmvRow);
 let ingsQty = [];
 
+function updateHeader() {
+  var x = document.getElementById("selectRecipe").value;
+  if (x !== null) {
+    x = "Grocery List Builder"
+  }
+  document.getElementById("liveUpdate").innerHTML = x;
+}
+
 $("#selectRecipe").change(function (e) {
   let item = e.currentTarget.value
   item = item.replace(" ", "_")
-  document.getElementById('blankholder').style.visibility = "hidden";
-  document.getElementById('blankholder').style.position = "absolute";
-  clearIngs();
-
-  $.getJSON("search/" + item, (result) => {
-    ings = result.ingredients;
-    for (i = 0; i < ings.length; i++) {
-      loadRecipe(ings[i][0], ings[i][1], ings[i][2], i + 1);
-    };
-  })
+  let curRec = []
+  let selRec = document.getElementById('selRec')
+  for (p = 0; p < selRec.children.length; p++) {
+    let curitem = selRec.children[p].value.replace(" ", "_")
+    curRec.push(curitem);
+  };
+  if (curRec.indexOf(item) !== -1) {
+    ingsQty = [];
+    ingsLen = document.getElementById('ingTbl').children.length - 1
+    for (let p = ingsLen; p > 0; p--) {
+      document.getElementById('ingTbl').children[p].remove();
+    }
+    document.getElementById('blankholder').style.visibility = "hidden";
+    document.getElementById('blankholder').style.position = "absolute";
+    document.getElementById('blankholder').innerText = "Select a Recipe";
+    $.getJSON("search/" + item, (result) => {
+      ings = result.ingredients;
+      for (i = 0; i < ings.length; i++) {
+        loadRecipe(ings[i][0], ings[i][1], ings[i][2], i + 1);
+      };
+    })
+  } else {
+    document.getElementById('blankholder').innerText = "Add ingredients"
+  }
 });
 
 $(document).ready(function (e) {
@@ -35,6 +57,8 @@ $(document).ready(function (e) {
     }
   })
 });
+
+//$('#clearList').click(clearIngs());
 
 $('#addJSON').click(() => {
   let ingredients = {};
@@ -157,12 +181,18 @@ function rmvRow2(cls) {
 }
 
 function clearIngs() {
+  document.getElementById('blankholder').style.visibility = "visible";
+  document.getElementById('blankholder').style.position = "relative";
+  document.getElementById('blankholder').innerText = "Select a Recipe";
   ingsQty = [];
-  ings = $("#ingredient").length;
-  while (document.getElementById("ingredient") !== null) {
-    document.getElementById("ingredient").remove();
+  document.getElementById('selectRecipe').value = null;
+  ingsLen = document.getElementById('ingTbl').children.length - 1
+  console.log(ingsLen);
+  for (let p = ingsLen; p > 0; p--) {
+    document.getElementById('ingTbl').children[p].remove();
   }
-}
+};
+
 
 function clearMastIngs() {
   ings = $("#masteringredient").length;

@@ -59,6 +59,20 @@ form {
   padding: auto;
 }
 
+#form {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
 select {
   -webkit-appearance: none;
   border-radius: 3px;
@@ -140,6 +154,7 @@ input:hover {
   vertical-align: bottom;
 }
 
+#clearList,
 #addJSON,
 #addList {
   margin: 0 auto;
