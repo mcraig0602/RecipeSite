@@ -44,7 +44,6 @@ app.get('/all/ingredients', allIngs);
 function allIngs(request, response) {
   let ings = [];
   let filtIngs = [];
-
   for (let i = 0; i < recipes.recipes.length; i++) {
     for (let j = 0; j < recipes.recipes[i].ingredients.length; j++) {
       ings.push(recipes.recipes[i].ingredients[j].name);
@@ -56,7 +55,6 @@ function allIngs(request, response) {
       filtIngs.push(ings[k]);
     }
   }
-
   reply = {
     status: "complete",
     ingredients: filtIngs
