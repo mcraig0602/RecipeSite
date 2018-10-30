@@ -13,8 +13,8 @@
 <body>
   <div id="recipe">
     <h1 id="liveUpdate">Title</h1>
-    <form>
-      <input placeholder="Recipes" list="selRec" id="selectRecipe" name="recSelect" oninput="updateHeader()" />
+    <form id="tblControls">
+      <input placeholder="Recipes" list="selRec" id="selectRecipe" name="recSelect" />
       <label for="recSelect">Servings:</label>
       <datalist id="selRec"></datalist>
       <input value="1" type="number" id="serveInput" name="serveInput" placeholder="1" min="0" step="1">
@@ -51,7 +51,7 @@
         <option value="cup">cup</option>
       </select>
     </form>
-    <div id="form">
+    <div id="controls">
       <button type="button" id="addList">Add to list</button>
       <button type="button" id="clearList" onclick="clearIngs()">Clear list</button>
       <button type="button" id="addJSON">Add to Recipebook</button>
@@ -78,6 +78,17 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="grid" id="masterRecs">
+    <div id="box">
+      Hot Chocolate
+    </div>
+    <div id="box">
+      <h3>Basic Risotto</h3>
+    </div>
+    <div id="box">
+      <h3>Mushroom Risotto</h3>
+    </div>
   </div>
 </body>
 <footer>

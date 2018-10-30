@@ -65,23 +65,45 @@ body {
   padding: 5%;
 }
 
-hr {}
-
-.container {}
-
 /*Form stuff*/
 form {
   margin: auto;
-  //margin-bottom: 10px;
   vertical-align: bottom;
   padding: auto;
 }
 
-#form {
+#controls {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start
+  display: grid;
+  align-items: flex-start;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-gap: 10px;
+}
+
+#tblControls {
+  width: 100%;
+  display: grid;
+  align-items: flex-start;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+#masterRecs {
+  margin-left: 10%;
+  margin-right: 10%;
+  //width: 100%;
+  display: grid;
+  //align-items: flex-start;
+  //grid-template-columns: 1fr 1fr 1fr 1fr;
+  //grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-auto-rows: 1fr;
+}
+
+#box {
+  background: $ltblue;
+  text-align: center;
+  width: 75%;
 }
 
 select {
@@ -134,23 +156,18 @@ input:hover {
 #qtyInput {
   width: 12%;
   height: 100%;
-  display: inline;
   border-right: none;
   border-radius: 3px 0px 0px 3px;
 }
 
 #ingInput {
   margin: 0;
-  width: 40%;
-  height: 100%;
   display: inline;
   vertical-align: middle;
 }
 
 #unitInput {
   margin-left: -5px;
-  width: 7%;
-  height: 100%;
   display: inline;
   border-left: none;
   border-radius: 0px 3px 3px 0px;
@@ -159,7 +176,6 @@ input:hover {
 }
 
 #addbtn {
-
   margin-right: .5%;
   height: 100%;
   width: 5%;
@@ -185,7 +201,8 @@ input:hover {
   width: 75%;
 }
 
-#ingTable {
+#ingTable,
+#masterTable {
   margin: auto;
 }
 

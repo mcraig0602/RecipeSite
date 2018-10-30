@@ -1,14 +1,25 @@
 document.getElementById("addbtn").addEventListener("click", addRow);
-document.getElementById("addbtn").addEventListener("click", rmvRow);
+//document.getElementById("addbtn").addEventListener("click", rmvRow);
 let ingsQty = [];
 
-function updateHeader() {
-  var x = document.getElementById("selectRecipe").value;
-  if (x !== null) {
-    x = "Grocery List Builder"
-  }
-  document.getElementById("liveUpdate").innerHTML = x;
-}
+$(document).ready(function (e) {
+  //Get Recipes
+  $.getJSON("all/recipes", (result) => {
+    for (i = 0; i < result.recipe.length; i++) {
+      let sel = document.createElement('option');
+      sel.setAttribute('value', result.recipe[i].replace("_", " "));
+      document.getElementById('selRec').appendChild(sel);
+    }
+  })
+  //Get Ingredients
+  $.getJSON("all/ingredients", (result) => {
+    for (i = 0; i < result.ingredients.length; i++) {
+      let sel = document.createElement('option');
+      sel.setAttribute('value', result.ingredients[i])
+      document.getElementById('mstrIngs').appendChild(sel);
+    }
+  })
+});
 
 $("#selectRecipe").change(function (e) {
   let item = e.currentTarget.value
@@ -38,27 +49,6 @@ $("#selectRecipe").change(function (e) {
     document.getElementById('blankholder').innerText = "Add ingredients"
   }
 });
-
-$(document).ready(function (e) {
-  //Get Recipes
-  $.getJSON("all/recipes", (result) => {
-    for (i = 0; i < result.recipe.length; i++) {
-      let sel = document.createElement('option');
-      sel.setAttribute('value', result.recipe[i].replace("_", " "));
-      document.getElementById('selRec').appendChild(sel);
-    }
-  })
-  //Get Ingredients
-  $.getJSON("all/ingredients", (result) => {
-    for (i = 0; i < result.ingredients.length; i++) {
-      let sel = document.createElement('option');
-      sel.setAttribute('value', result.ingredients[i])
-      document.getElementById('mstrIngs').appendChild(sel);
-    }
-  })
-});
-
-//$('#clearList').click(clearIngs());
 
 $('#addJSON').click(() => {
   let ingredients = {};
@@ -157,10 +147,12 @@ function rmvRow(cls) {
     var delRowI = cls.parentNode.parentNode.rowIndex;
     document.getElementById('ingTable').deleteRow(delRowI);
     var ingTbl = document.getElementById('ingTbl');
-    var ingTblCt = ingTbl.childElementCount;
     ingsQty.splice(delRowI - 2, 1);
-    for (i = 1; i < ingTblCt; i++) {
-      ingTbl.children[i].children[0].innerText = i;
+    for (i = 1; i < document.getElementById('ingTbl').children.length; i++) ingTbl.children[i].children[0].innerText = i;
+    if (document.getElementById('ingTbl').children.length == 1) {
+      document.getElementById('blankholder').style.visibility = "visible";
+      document.getElementById('blankholder').style.position = "relative";
+      document.getElementById('selectRecipe').value = null;
     }
   }
 }

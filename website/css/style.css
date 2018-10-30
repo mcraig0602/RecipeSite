@@ -59,18 +59,44 @@ form {
   padding: auto;
 }
 
-#form {
+#controls {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  display: -ms-grid;
+  display: grid;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  -ms-grid-columns: 1fr 1fr 2fr;
+      grid-template-columns: 1fr 1fr 2fr;
+  grid-gap: 10px;
+}
+
+#tblControls {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-grid-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+#masterRecs {
+  margin-left: 10%;
+  margin-right: 10%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(10rem, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-auto-rows: 1fr;
+}
+
+#box {
+  background: #bad7ec70;
+  text-align: center;
+  width: 75%;
 }
 
 select {
@@ -123,23 +149,18 @@ input:hover {
 #qtyInput {
   width: 12%;
   height: 100%;
-  display: inline;
   border-right: none;
   border-radius: 3px 0px 0px 3px;
 }
 
 #ingInput {
   margin: 0;
-  width: 40%;
-  height: 100%;
   display: inline;
   vertical-align: middle;
 }
 
 #unitInput {
   margin-left: -5px;
-  width: 7%;
-  height: 100%;
   display: inline;
   border-left: none;
   border-radius: 0px 3px 3px 0px;
@@ -175,7 +196,8 @@ input:hover {
   width: 75%;
 }
 
-#ingTable {
+#ingTable,
+#masterTable {
   margin: auto;
 }
 
