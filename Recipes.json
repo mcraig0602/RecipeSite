@@ -92,34 +92,8 @@
       ]
     },
     {
-      "name": "Basic_Risotto",
-      "ingredients": [
-        {
-          "name": "Arborio Rice",
-          "qty": "2",
-          "unit": "cups"
-        },
-        {
-          "name": "Chicken Stock",
-          "qty": "3",
-          "unit": "cups"
-        },
-        {
-          "name": "Shallots",
-          "qty": "2",
-          "unit": "oz"
-        },
-        {
-          "name": "Reisling",
-          "qty": "2",
-          "unit": "floz"
-        },
-        {
-          "name": "Thyme",
-          "qty": "1",
-          "unit": "tbsp"
-        }
-      ]
+      "name": "",
+      "ingredients": []
     }
   ]
 }

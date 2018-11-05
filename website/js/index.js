@@ -77,6 +77,7 @@ function loadRecipe(nameJSON, qtyJSON, unitJSON, ingTblCt) {
   rmvIng.setAttribute('type', 'button');
   rmvIng.setAttribute('id', 'removeBtn');
   rmvIng.setAttribute('onclick', 'rmvRow(this)');
+  rmvIng.setAttribute('class', 'btn btn-outline-danger');
   rmvIng.innerText = '-';
   var rmvIngP = document.createElement('td');
   rmvIngP.appendChild(rmvIng);
@@ -88,6 +89,7 @@ function loadRecipe(nameJSON, qtyJSON, unitJSON, ingTblCt) {
   ing.innerHTML = nameJSON;
   //Row Number//
   var rowNum = document.createElement('th');
+  rowNum.setAttribute('scope', 'row')
   rowNum.innerText = ingTblCt;
   //Create Row//
   var ingredient = document.createElement('tr')
@@ -200,6 +202,7 @@ function addMastRow(ingr, qtyI, unit) {
   rmvIng.setAttribute('type', 'button');
   rmvIng.setAttribute('id', 'removeBtn');
   rmvIng.setAttribute('onclick', 'rmvRow2(this)');
+  rmvIng.setAttribute('class', 'btn btn-outline-danger');
   rmvIng.innerText = '-';
   let rmvIngP = document.createElement('td');
   rmvIngP.appendChild(rmvIng);
@@ -242,7 +245,6 @@ $('#addJSON').click(() => {
     }
     addJSON.name = document.getElementById('selectRecipe').value;
     addJSON.ingredients = addIngs;
-    //addJSON.stringify(tempJSON);
     result.recipes.push(addJSON);
   })
 })
@@ -293,6 +295,8 @@ $("#addList").click(
       addMastRow(currentIngs[j], currentQty[j], currentUnit[j]);
     }
   });
+
+//Multiplies qtys for additional servings
 $("#serveInput").change(function (e) {
   let serves = document.getElementById('serveInput').value;
   for (i = 1; i <= ingsQty.length; i++) {

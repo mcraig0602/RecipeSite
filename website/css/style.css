@@ -1,268 +1,41 @@
-/* Remove padding and margin */
-* {
-  font-size: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-weight: 400;
-  line-height: 1.5;
-  background: #fafafa;
+#sevLab {
+  padding-top: 5px;
+  text-align: center;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-bottom: .5rem;
-  font-family: inherit;
-  font-weight: 500;
-  line-height: 1.2;
-  color: inherit;
-}
-
-h1 {
-  font-size: 2.5rem;
-}
-
-html {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-div {
-  margin: auto;
-}
-
-.clear {
-  clear: both;
-}
-
-.right {
-  float: right;
-}
-
-.left {
-  float: left;
-}
-
-body {
-  background: #fafafa;
-  color: black;
-  padding: 5%;
-}
-
-/*Form stuff*/
 form {
-  margin: auto;
-  vertical-align: bottom;
-  padding: auto;
-}
-
-#controls {
-  width: 100%;
-  display: -ms-grid;
-  display: grid;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -ms-grid-columns: 1fr 1fr 2fr;
-      grid-template-columns: 1fr 1fr 2fr;
-  grid-gap: 10px;
-}
-
-#tblControls {
-  width: 100%;
-  display: -ms-grid;
-  display: grid;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -ms-grid-columns: 2fr 1fr 1fr;
-      grid-template-columns: 2fr 1fr 1fr;
-  grid-gap: 10px;
-}
-
-#masterRecs {
-  margin-left: 10%;
-  margin-right: 10%;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (minmax(10rem, 1fr))[auto-fill];
-      grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-  grid-auto-rows: 1fr;
-}
-
-#box {
-  background: #bad7ec70;
-  text-align: center;
-  width: 75%;
-}
-
-select {
-  -webkit-appearance: none;
-  border-radius: 3px;
-  border-width: 1px solid #52525271;
-}
-
-select:hover,
-button:hover,
-input:hover {
-  border: 1px solid #FED766;
-}
-
-#serveInput {
-  width: 75px;
-  margin-right: 10%;
-}
-
-label {
-  margin-right: 5px;
-  margin-left: 10%;
-}
-
-button {
-  background: transparent;
-  -webkit-appearance: none;
-  border: 1px solid #52525271;
-  border-radius: 3px;
-  padding: 0;
-  vertical-align: middle;
-}
-
-button:hover {
-  border: 1px solid #FED766;
-}
-
-input {
-  background: transparent;
-  -webkit-appearance: none;
-  border-radius: 3px;
-  border: 1px solid #52525271;
-  vertical-align: middle;
-}
-
-input:hover {
-  border: 1px solid #FED766;
-}
-
-#qtyInput {
-  width: 12%;
-  height: 100%;
-  border-right: none;
-  border-radius: 3px 0px 0px 3px;
-}
-
-#ingInput {
-  margin: 0;
-  display: inline;
-  vertical-align: middle;
-}
-
-#unitInput {
-  margin-left: -5px;
-  display: inline;
-  border-left: none;
-  border-radius: 0px 3px 3px 0px;
-  background-color: #52525271;
-  vertical-align: middle;
-}
-
-#addbtn {
-  margin-right: .5%;
-  height: 100%;
-  width: 5%;
-  vertical-align: bottom;
-}
-
-#clearList,
-#addJSON,
-#addList {
-  margin: 0 auto;
-  margin-top: 10px;
-  height: 40px;
-  background-color: #bad7ec70;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-/* Table stuff*/
-#recipe {
-  padding-bottom: 2%;
-  text-align: center;
-  margin: auto;
-  width: 75%;
-}
-
-#ingTable,
-#masterTable {
-  margin: auto;
-}
-
-thead {
-  border-bottom: 2px solid gray;
-}
-
-td {
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: #bad7ec70;
-}
-
-#topper {
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: gray;
-}
-
-#removeBtn {
-  width: 50%;
-  background-color: rgba(151, 76, 69, 0.377);
-  color: white;
-}
-
-#remove {
-  border-width: 0px;
-}
-
-div > h1,
-h2 {
-  text-align: center;
-}
-
-#masterList {
-  width: 100%;
-  padding-left: 14%;
-}
-
-#ingredient {
-  margin-bottom: 3%;
+  margin-bottom: 10px;
 }
 
 #blankholder {
-  visibility: visible;
-  color: #25506da6;
-  position: relative;
-  border-bottom: 1px solid #bad7ec70;
-}
-
-#blankholder2 {
-  visibility: visible;
-  color: #25506da6;
-  position: relative;
-  border-bottom: 1px solid #bad7ec70;
-}
-
-/*Other*/
-#placeholder {
   text-align: center;
 }
 
-hr {
-  color: #52525271;
+#blankholder2 {
+  text-align: center;
+}
+
+.tblContainer {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.square {
   position: relative;
-  margin: auto;
+  width: 10vw;
+  border: 2px solid black;
+}
+
+.square:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.content {
+  position: absolute;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
 }
 /*# sourceMappingURL=style.css.map */

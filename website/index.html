@@ -5,43 +5,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!--<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">-->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <!-- <link rel="stylesheet" href="bower_components/font-awesome/web-fonts-with-css/fontawesome.min.css"> -->
   <link rel="stylesheet" href="css/style.css">
   <title>Document</title>
 </head>
 
 <body>
-  <div id="recipe">
-    <h1 id="liveUpdate">Title</h1>
-    <form id="tblControls">
-      <input placeholder="Recipes" list="selRec" id="selectRecipe" name="recSelect" />
-      <label for="recSelect">Servings:</label>
+  <div id="recipe" class="container">
+    <h1 class="text-center">Title</h1>
+    <form id="tblControls" class="form-control-group row">
+      <input placeholder="Recipes" list="selRec" class="offset-sm-2 col-md-4 form-control col-sm-4" id="selectRecipe"
+        name="recSelect" />
       <datalist id="selRec"></datalist>
-      <input value="1" type="number" id="serveInput" name="serveInput" placeholder="1" min="0" step="1">
+      <div class="col-sm-4 row">
+        <label for="recSelect" class="offset-sm-3 col-sm-5 align-middle" id="sevLab">Servings:</label>
+        <input value="1" type="number" class="form-control col-sm-3" id="serveInput" name="serveInput" placeholder="1"
+          min="0" step="1">
+      </div>
     </form>
-    <table id="ingTable">
-      <thead>
-        <tr id="topper">
-          <th width="5%">#</th>
-          <th width="50%">Ingredient</th>
-          <th width="7%">Quantity</th>
-          <th width="10%"></th>
-
-        </tr>
-      </thead>
-      <tbody id="ingTbl">
-        <tr>
-          <th colspan=4 id="blankholder">Select a Recipe</th>
-        </tr>
-      </tbody>
-    </table>
-
-    <form>
-      <button type="button" class="addIng" id="addbtn" onclick="addRow">+</button>
-      <input placeholder="Select an Ingredient" list="mstrIngs" id="ingInput" name="ingInput" />
+    <div class="tblContainer">
+      <table id="ingTable" class="table-sm table-hover">
+        <thead>
+          <tr id="topper">
+            <th scope="col" width="5%">#</th>
+            <th scope="col" width="30%">Ingredient</th>
+            <th scope="col" width="7%">Quantity</th>
+            <th scope="col" width="10%"></th>
+          </tr>
+        </thead>
+        <tbody id="ingTbl">
+          <tr>
+            <th colspan=4 id="blankholder" scope="row">Select a Recipe</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <form class="form-control-group row">
+      <div class="offset-lg-1 col-sm-1">
+        <button type="button" class="btn btn-outline-primary col-xs-12" id="addbtn" onclick="addRow">+</button>
+      </div>
+      <input placeholder="Select an Ingredient" class="form-control col-sm-5 mr-5" list="mstrIngs" id="ingInput" name="ingInput" />
       <datalist id="mstrIngs"></datalist>
-      <input type="number" id="qtyInput" name="qtyInput" placeholder="Qty" min="0" step="0.25">
-      <select name="Units" id="unitInput">
+      <input type="number" id="qtyInput" class="form-control col-sm-2 col-lg-1" name="qtyInput" placeholder="Qty" min="0"
+        step="0.25">
+      <select name="Units" id="unitInput" class="form-control col-sm-2 col-lg-1">
         <option value="" disabled selected>Units</option>
         <option value="oz">oz</option>
         <option value="floz">floz</option>
@@ -51,10 +59,11 @@
         <option value="cup">cup</option>
       </select>
     </form>
-    <div id="controls">
-      <button type="button" id="addList">Add to list</button>
-      <button type="button" id="clearList" onclick="clearIngs()">Clear list</button>
-      <button type="button" id="addJSON">Add to Recipebook</button>
+    <div id="row">
+      <button type="button" id="addList" class="offset-sm-2 col-sm-3 btn btn-outline-primary">Add
+        to list</button>
+      <button type="button" id="clearList" class="col-sm-2 btn btn-outline-danger" onclick="clearIngs()">Clear list</button>
+      <button type="button" id="addJSON" class="col-sm-3 btn btn-outline-primary">Recipebook</button>
     </div>
   </div>
   <div>
@@ -62,38 +71,36 @@
   </div>
   <br>
 
-  <div id="recipe">
-    <table id="masterTbl">
-      <thead>
-        <tr id="topper">
-          <th width="5%"></th>
-          <th width="50%">Ingredient</th>
-          <th width="7%">Quantity</th>
-          <th width="10%"></th>
-        </tr>
-      </thead>
-      <tbody id="mstrTbl">
-        <tr>
-          <th colspan=4 id="blankholder2">Select a Recipe</th>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="grid" id="masterRecs">
-    <div id="box">
-      Hot Chocolate
-    </div>
-    <div id="box">
-      <h3>Basic Risotto</h3>
-    </div>
-    <div id="box">
-      <h3>Mushroom Risotto</h3>
+  <div id="recipe" class="container">
+    <div class="tblContainer">
+      <table id="masterTbl" class="table table-hover">
+        <thead>
+          <tr id="topper">
+            <th width="5%"></th>
+            <th width="50%">Ingredient</th>
+            <th width="7%">Quantity</th>
+            <th width="10%"></th>
+          </tr>
+        </thead>
+        <tbody id="mstrTbl">
+          <tr>
+            <th colspan=4 id="blankholder2">Select a Recipe</th>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+  <div class="square">
+    <div class="content">
+      Hot chocolate
+    </div>
+  </div>
+
 </body>
 <footer>
   <script src="js/jquery-3.3.1.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </footer>
 
 </html>
