@@ -1,6 +1,8 @@
 node_modules/
 bower_components/
 
+/node_modules
+/website/bower_components
 
 # Compiled source #
 ###################
