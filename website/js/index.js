@@ -226,39 +226,16 @@ function addMastRow(ingr, qtyI, unit) {
   ingredient.appendChild(rmvIngP);
   mstrTbl.appendChild(ingredient);
 }
-
-$('#addJSON').click(() => {
-  $.getJSON("JSON/Recipes.json", function (result) {
-    addJSON = {};
-    tempJSON = {};
-    addIngs = [];
-    svIng = document.getElementById('ingTbl')
-    for (i = 1; i < svIng.children.length; i++) {
-      temp = {};
-      //Quantity and Units
-      qty = document.getElementById('ingTbl').children[i].childNodes[2].childNodes[0].data.split(" ")
-      ing = document.getElementById('ingTbl').children[i].childNodes[1].childNodes[0].data
-      temp.name = ing;
-      temp.qty = qty[0];
-      temp.unit = qty[1];
-      addIngs.push(temp);
-    }
-    addJSON.name = document.getElementById('selectRecipe').value;
-    addJSON.ingredients = addIngs;
-    result.recipes.push(addJSON);
-  })
-})
-
-//Checks to see if any current ingredients are in the master ingredient list
 $("#addList").click(
   function (e) {
     document.getElementById('blankholder2').style.visibility = "hidden";
     document.getElementById('blankholder2').style.position = "absolute";
-    var ings = document.getElementById('ingTbl').children.length;
-    var testlnth = document.getElementById('mstrTbl').children.length;
-    var currentIngs = [];
-    var currentQty = [];
-    var currentUnit = [];
+    let ings = document.getElementById('ingTbl').children.length;
+    let testlnth = document.getElementById('mstrTbl').children.length;
+    const recipe = document.getElementById('selectRecipe').value
+    let currentIngs = [];
+    let currentQty = [];
+    let currentUnit = [];
 
     for (var i = 1; i < testlnth; i++) {
       var mstrIngs = document.getElementById('mstrTbl').children[i].childNodes[1].childNodes[0].data
@@ -271,6 +248,7 @@ $("#addList").click(
       currentUnit.push(unit);
       currentIngs.push(mstrIngs);
     }
+    console.log(currentIngs)
     for (i = 1; i < ings; i++) {
       if (currentIngs.indexOf(document.getElementById('ingTbl').children[i].childNodes[1].childNodes[0].data) !== -1) {
         let qty = document.getElementById('ingTbl').children[i].childNodes[2].childNodes[0].data.split(" ")
@@ -295,6 +273,75 @@ $("#addList").click(
       addMastRow(currentIngs[j], currentQty[j], currentUnit[j]);
     }
   });
+
+function indRecipe(currentRecipe){
+  //This probably will go into addList
+  let myTab = document.getElementById('myTab')
+  let recipe = document.createElement('a')
+  recipe.setAttribute('class', 'nav-link');
+  recipe.setAttribute('id', 'home-tab');
+  recipe.setAttribute('data-toggle', 'tab');
+  recipe.setAttribute('href', '#'+currentRecipe); //put currentRecipe here with # infront of it
+  recipe.setAttribute('role', 'tab');
+  recipe.innerText = currentRecipe; //put currentRecipe here
+  let recipe2 = document.createElement('li');
+  recipe2.setAttribute('class','nav-item');
+  recipe2.appendChild(recipe);
+
+  //create table
+  let recTblNum = document.createElement('th');
+  recTblNum.setAttribute('width', '5%');
+  let recTblIng = document.createElement('th');
+  recTblIng.setAttribute('width', '50%');
+  let recTblQty = document.createElement('th')
+  recTblQty.setAttribute('width', '7%');
+  let recTblRmv = document.createElement('th');
+  recTblRmv.setAttribute('width', '10%');
+  let recTbl = document.createElement('tr');
+  recTbl.setAttribute('id','topper');
+  recTbl.appendChild(recTblNum);
+  recTbl.appendChild(recTblIng);
+  recTbl.appendChild(recTblQty);
+  recTbl.appendChild(recTblRmv);
+  let indTbl = document.createElement('thead').appendChild(recTbl);
+  let indRecTbl = document.createElement('table').appendChild(indTbl)
+  recipe2.appendChild(indRecTbl)
+  myTab.appendChild(recipe2);
+  console.log(recipe2);
+  
+/*   var mstrTbl = document.getElementById('mstrTbl');
+  let indTbl = document.createElement('')
+
+  //Create individual line
+  //Remove Line Button
+  let rmvIng = document.createElement('button');
+  rmvIng.setAttribute('type', 'button');
+  rmvIng.setAttribute('id', 'removeBtn');
+  rmvIng.setAttribute('onclick', 'rmvRow2(this)');
+  rmvIng.setAttribute('class', 'btn btn-outline-danger');
+  rmvIng.innerText = '-';
+  let rmvIngP = document.createElement('td');
+  rmvIngP.appendChild(rmvIng);
+  //Quantity//
+  var qty = document.createElement('td');
+  qty.innerText = String(qtyI) + " " + unit;
+  qty.setAttribute('id', 'qty')
+  //Ingredient//
+  var ing = document.createElement('td');
+  ing.innerText = String(ingr);
+  //Row Number//
+  var rowNum = document.createElement('th');
+  rowNum.innerText = document.getElementById('mstrTbl').children.length;
+  //Create Row//
+  var ingredient = document.createElement('tr')
+  ingredient.setAttribute('id', 'masteringredient');
+  //Combine Cells//
+  ingredient.appendChild(rowNum);
+  ingredient.appendChild(ing);
+  ingredient.appendChild(qty);
+  ingredient.appendChild(rmvIngP);
+  mstrTbl.appendChild(ingredient); */
+}
 
 //Multiplies qtys for additional servings
 $("#serveInput").change(function (e) {
