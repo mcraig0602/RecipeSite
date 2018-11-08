@@ -25,6 +25,10 @@ form {
       align-content: center;
 }
 
+.btn-link {
+  width: 100% !important;
+}
+
 .square {
   position: relative;
   width: 10vw;
