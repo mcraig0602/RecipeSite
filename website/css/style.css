@@ -53,4 +53,8 @@ form {
 .content p {
   margin: auto 0;
 }
+
+.indRecipe {
+  position: absolute;
+}
 /*# sourceMappingURL=style.css.map */

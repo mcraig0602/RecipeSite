@@ -1,5 +1,6 @@
 node_modules/
 bower_components/
+website/dist
 
 /node_modules
 /website/bower_components
