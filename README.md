@@ -1,8 +1,8 @@
 This is one of my first javascript projects. That i wrote the whole code with out editing an already existing project. It just lets you enter recipes and adds them to a list.
 
 Completed:
--Converted to bootstrap
--Added Gulp integrations for sass and jade preprocessor
+-added recipes to masterlist
+-Learned about object literals, so that shortened up my JS a little bit(still a work in progress)
 
 Upcoming updates:
 -Add recipes to master list with servings

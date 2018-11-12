@@ -57,4 +57,12 @@ form {
 .indRecipe {
   position: absolute;
 }
+
+#close {
+  float: right;
+}
+
+#close:hover {
+  color: red !important;
+}
 /*# sourceMappingURL=style.css.map */

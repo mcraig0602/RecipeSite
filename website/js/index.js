@@ -40,7 +40,7 @@ $("#selectRecipe").change(function (e) {
     document.getElementById('blankholder').style.position = "absolute";
     document.getElementById('blankholder').innerText = "Select a Recipe";
     $.getJSON("search/" + item, (result) => {
-      ings = result.ingredients;
+      const ings = result.ingredients;
       for (i = 0; i < ings.length; i++) {
         loadRecipe(ings[i][0], ings[i][1], ings[i][2], i + 1);
       };
@@ -73,40 +73,20 @@ $('#addJSON').click(() => {
 })
 
 function loadRecipe(nameJSON, qtyJSON, unitJSON, ingTblCt) {
-  var rmvIng = document.createElement('button');
-  rmvIng.setAttribute('type', 'button');
-  rmvIng.setAttribute('id', 'removeBtn');
-  rmvIng.setAttribute('onclick', 'rmvRow(this)');
-  rmvIng.setAttribute('class', 'btn btn-outline-danger');
-  rmvIng.innerText = '-';
-  var rmvIngP = document.createElement('td');
-  rmvIngP.appendChild(rmvIng);
-  //Quantity//
-  var qty = document.createElement('td');
-  qty.innerText = qtyJSON + ' ' + unitJSON;
-  //Ingredient//
-  var ing = document.createElement('td');
-  ing.innerHTML = nameJSON;
-  //Row Number//
-  var rowNum = document.createElement('th');
-  rowNum.setAttribute('scope', 'row')
-  rowNum.innerText = ingTblCt;
-  //Create Row//
-  var ingredient = document.createElement('tr')
-  ingredient.setAttribute('id', 'ingredient');
-  //Combine Cells//
-  ingredient.appendChild(rowNum);
-  ingredient.appendChild(ing);
-  ingredient.appendChild(qty);
-  ingredient.appendChild(rmvIngP);
-  ingTbl.appendChild(ingredient);
+  let indLne = `
+  <tr id="ingredient">
+  <th>${ingTblCt}</th>
+  <td>${nameJSON}</td>
+  <td id="qty">${qtyJSON} ${unitJSON}</td>
+  <td><button type="button" id="removeBtn" onclick="rmvRow(this)" class="btn btn-outline-danger">-</button></td>
+  </tr>`;
+  $('#ingTbl').append(indLne);
   ingsQty.push(qtyJSON);
 }
 
 function addRow() {
   document.getElementById('blankholder').style.visibility = "hidden";
   document.getElementById('blankholder').style.position = "absolute";
-  var ingTbl = document.getElementById('ingTbl');
   var ingTblCt = ingTbl.childElementCount
   var ingRow = document.getElementById('ingInput').value;
   var qtyRow = document.getElementById('qtyInput').value;
@@ -114,32 +94,14 @@ function addRow() {
   if (ingRow == "" || qtyRow == "" || unitRow == "") {
     alert('You must fill in all fields');
   } else {
-    //Remove Ingredient Button//
-    var rmvIng = document.createElement('button');
-    rmvIng.setAttribute('type', 'button');
-    rmvIng.setAttribute('id', 'removeBtn');
-    rmvIng.setAttribute('onclick', 'rmvRow(this)');
-    rmvIng.innerText = '-';
-    var rmvIngP = document.createElement('td');
-    rmvIngP.appendChild(rmvIng);
-    //Quantity//
-    var qty = document.createElement('td');
-    qty.innerText = qtyRow + ' ' + unitRow;
-    //Ingredient//
-    var ing = document.createElement('td');
-    ing.innerText = ingRow;
-    //Row Number//
-    var rowNum = document.createElement('th');
-    rowNum.innerText = ingTblCt + 1;
-    //Create Row//
-    var ingredient = document.createElement('tr')
-    ingredient.setAttribute('id', 'ingredient');
-    //Combine Cells//
-    ingredient.appendChild(rowNum);
-    ingredient.appendChild(ing);
-    ingredient.appendChild(qty);
-    ingredient.appendChild(rmvIngP);
-    ingTbl.appendChild(ingredient);
+    let indLne = `
+    <tr id="ingredient">
+    <th>${ingTblCt}</th>
+    <td>${ingRow}</td>
+    <td id="qty">${qtyRow} ${unitRow}</td>
+    <td><button type="button" id="removeBtn" onclick="rmvRow(this)" class="btn btn-outline-danger">-</button></td>
+    </tr>`;
+    $('#ingTbl').append(indLne);
     ingsQty.push(qtyRow)
   }
 }
@@ -159,6 +121,7 @@ function rmvRow(cls) {
   }
 }
 
+//removes the row from Master List
 function rmvRow2(cls) {
   if (cls.parentNode.parentNode.rowIndex !== null) {
     var delRowI = cls.parentNode.parentNode.rowIndex;
@@ -172,7 +135,37 @@ function rmvRow2(cls) {
       mstrTbl.children[i].children[0].innerText = i;
     }
   }
+  //Need to remove child row in tab nav
 }
+
+function rmvRow3(cls) {
+  if (cls.parentNode.parentNode.rowIndex !== null) {
+    let delRowI = cls.parentNode.parentNode.rowIndex;
+    let recipeID = cls.parentNode.parentNode.parentNode.parentNode.id;
+    let ing = cls.parentNode.parentNode.children[1].innerText;
+    let qtyu = cls.parentNode.parentNode.children[2].innerText;
+    let qtyU = qtyu.split(' ');
+    let qty = qtyU[0];
+    console.log(qty);
+    let cnfrm = true;
+    if (cnfrm) {
+      document.getElementById(recipeID).deleteRow(delRowI);
+    }
+    let indTbl = document.getElementById(recipeID);
+    let indTblCt = mstrTbl.children[1].childElementCount;
+    for (let i = 0; i < indTblCt; i++) {
+      console.log(i + 1);
+      indTbl.children[1].children[i].children[0].innerText = i + 1;
+    }
+    let mstrIngs = []
+    var mstrTbl = document.getElementById('mstrTbl');
+    var mstrTblCt = mstrTbl.childElementCount;
+    for (let j = 1; j < mstrTblCt; j++) {
+      mstrIngs.push(mstrTbl.children[j].children[1].innerText)
+    }
+  }
+}
+
 
 function clearIngs() {
   document.getElementById('blankholder').style.visibility = "visible";
@@ -181,12 +174,10 @@ function clearIngs() {
   ingsQty = [];
   document.getElementById('selectRecipe').value = null;
   ingsLen = document.getElementById('ingTbl').children.length - 1
-  console.log(ingsLen);
   for (let p = ingsLen; p > 0; p--) {
     document.getElementById('ingTbl').children[p].remove();
   }
 };
-
 
 function clearMastIngs() {
   ings = $("#masteringredient").length;
@@ -197,35 +188,17 @@ function clearMastIngs() {
 
 function addMastRow(ingr, qtyI, unit) {
   var mstrTbl = document.getElementById('mstrTbl');
-  //Remove Line Button
-  let rmvIng = document.createElement('button');
-  rmvIng.setAttribute('type', 'button');
-  rmvIng.setAttribute('id', 'removeBtn');
-  rmvIng.setAttribute('onclick', 'rmvRow2(this)');
-  rmvIng.setAttribute('class', 'btn btn-outline-danger');
-  rmvIng.innerText = '-';
-  let rmvIngP = document.createElement('td');
-  rmvIngP.appendChild(rmvIng);
-  //Quantity//
-  var qty = document.createElement('td');
-  qty.innerText = String(qtyI) + " " + unit;
-  qty.setAttribute('id', 'qty')
-  //Ingredient//
-  var ing = document.createElement('td');
-  ing.innerText = String(ingr);
-  //Row Number//
-  var rowNum = document.createElement('th');
-  rowNum.innerText = document.getElementById('mstrTbl').children.length;
-  //Create Row//
-  var ingredient = document.createElement('tr')
-  ingredient.setAttribute('id', 'masteringredient');
-  //Combine Cells//
-  ingredient.appendChild(rowNum);
-  ingredient.appendChild(ing);
-  ingredient.appendChild(qty);
-  ingredient.appendChild(rmvIngP);
-  mstrTbl.appendChild(ingredient);
-}
+  for (let i = 0; i < ingr.length; i++) {
+    let mstrLne = ``
+    mstrLne = ` <tr id = "masteringredient">
+        <th>${i + 1}</th>
+        <td>${ingr[i]}</td>
+        <td id="qty">${qtyI[i]} ${unit[i]}</td>
+        <td><button type="button" id="removeBtn" onclick="rmvRow2(this)" class="btn btn-outline-danger">-</button></td>
+        </tr>`;
+    $('#mstrTbl').append(mstrLne);
+  }
+};
 $("#addList").click(
   function (e) {
     document.getElementById('blankholder2').style.visibility = "hidden";
@@ -236,10 +209,10 @@ $("#addList").click(
     let currentIngs = [];
     let currentQty = [];
     let currentUnit = [];
-
     for (var i = 1; i < testlnth; i++) {
-      var mstrIngs = document.getElementById('mstrTbl').children[i].childNodes[1].childNodes[0].data
-      var mstrQty = document.getElementById('mstrTbl').children[i].childNodes[2].childNodes[0].data
+      let mstrIngs = document.getElementById('mstrTbl').children[i].children[1].innerText;
+      mstrIngs = mstrIngs.substr(0, mstrIngs.length - 1)
+      let mstrQty = document.getElementById('mstrTbl').children[i].children[2].innerText;
       //Seperating Qty and Unit
       mstrQty = mstrQty.split(" ");
       var qty = mstrQty[0];
@@ -248,19 +221,31 @@ $("#addList").click(
       currentUnit.push(unit);
       currentIngs.push(mstrIngs);
     }
-    console.log(currentIngs)
+    let ingredient = [];
+    let quantity = [];
+    let units = [];
+    for (let j = 1; j < ings; j++) {
+      ingredient.push(document.getElementById('ingTbl').children[j].children[1].innerText);
+      let masterQty = document.getElementById('ingTbl').children[j].children[2].innerText;
+      masterQty = masterQty.split(" ")
+      quantity.push(masterQty[0]);
+      units.push(masterQty[1]);
+    }
+    indRecipe(recipe, ingredient, quantity, units);
     for (i = 1; i < ings; i++) {
-      if (currentIngs.indexOf(document.getElementById('ingTbl').children[i].childNodes[1].childNodes[0].data) !== -1) {
-        let qty = document.getElementById('ingTbl').children[i].childNodes[2].childNodes[0].data.split(" ")
-        let ind = currentIngs.indexOf(document.getElementById('ingTbl').children[i].childNodes[1].childNodes[0].data)
+      let varIng = document.getElementById('ingTbl').children[i].children[1].innerText
+      varIng = varIng.substr(0, varIng.length - 1)
+      if (currentIngs.indexOf(varIng) !== -1) {
+        let qty = document.getElementById('ingTbl').children[i].children[2].innerText.split(" ")
+        let ind = currentIngs.indexOf(varIng);
         let newqty = parseInt(currentQty[ind]) + parseInt(qty[0])
         currentQty[ind] = newqty;
       } else {
         //let ingr = document.getElementById('ingTbl').children[i].childNodes[1].childNodes[0].data
-        let qty = document.getElementById('ingTbl').children[i].childNodes[2].childNodes[0].data.split(" ")
+        let qty = document.getElementById('ingTbl').children[i].children[2].innerText.split(" ")
         currentQty.push(qty[0]);
         currentUnit.push(qty[1]);
-        currentIngs.push(document.getElementById('ingTbl').children[i].childNodes[1].childNodes[0].data)
+        currentIngs.push(document.getElementById('ingTbl').children[i].children[1].innerText)
       };
     }
     clearIngs();
@@ -269,80 +254,48 @@ $("#addList").click(
     document.getElementById('selectRecipe').value = "";
     document.getElementById('serveInput').value = 1;
     clearMastIngs();
-    for (j = 0; j < currentQty.length; j++) {
-      addMastRow(currentIngs[j], currentQty[j], currentUnit[j]);
-    }
+    addMastRow(currentIngs, currentQty, currentUnit);
   });
 
-function indRecipe(currentRecipe){
+function indRecipe(currentRecipe, currentIngs, currentQty, currentUnit) {
   //This probably will go into addList
-  let myTab = document.getElementById('myTab')
-  let recipe = document.createElement('a')
-  recipe.setAttribute('class', 'nav-link');
-  recipe.setAttribute('id', 'home-tab');
-  recipe.setAttribute('data-toggle', 'tab');
-  recipe.setAttribute('href', '#'+currentRecipe); //put currentRecipe here with # infront of it
-  recipe.setAttribute('role', 'tab');
-  recipe.innerText = currentRecipe; //put currentRecipe here
-  let recipe2 = document.createElement('li');
-  recipe2.setAttribute('class','nav-item');
-  recipe2.appendChild(recipe);
-
+  let myTab = document.getElementById('myTab');
+  if (myTab.children.length === 0) {
+    $('#myTab').attr('visibility', 'visible');
+  }
+  let currentRecipeP = currentRecipe.replace(" ", "")
+  let tab = `<li class="nav-item">
+  <a class="nav-link" id="${currentRecipeP}-tab" data-toggle="tab" href="#${currentRecipeP}" role="tab">${currentRecipe}</a>
+  </li>`;
+  $('#myTab').append(tab);
   //create table
-  let recTblNum = document.createElement('th');
-  recTblNum.setAttribute('width', '5%');
-  let recTblIng = document.createElement('th');
-  recTblIng.setAttribute('width', '50%');
-  let recTblQty = document.createElement('th')
-  recTblQty.setAttribute('width', '7%');
-  let recTblRmv = document.createElement('th');
-  recTblRmv.setAttribute('width', '10%');
-  let recTbl = document.createElement('tr');
-  recTbl.setAttribute('id','topper');
-  recTbl.appendChild(recTblNum);
-  recTbl.appendChild(recTblIng);
-  recTbl.appendChild(recTblQty);
-  recTbl.appendChild(recTblRmv);
-  let indTbl = document.createElement('thead').appendChild(recTbl);
-  let indRecTbl = document.createElement('table').appendChild(indTbl)
-  recipe2.appendChild(indRecTbl)
-  myTab.appendChild(recipe2);
-  console.log(recipe2);
-  
-/*   var mstrTbl = document.getElementById('mstrTbl');
-  let indTbl = document.createElement('')
+  let tabTblH = `<div class="tab-pane fade indRecipe" id="${currentRecipeP}" role="tabpanel">
+      <table id="Tbl${currentRecipeP}" class="table-sm table-hover">
+      <thead>
+        <tr id="topper">
+          <th width="5%"></th>
+          <th width="50%">Ingredient</th>
+          <th width="7%">Quantity</th>
+          <th width="10%"></th>
+        </tr>
+      </thead>
+      <tbody id="mstrTbl">
+        <tr id="indIngredients">`;
 
-  //Create individual line
-  //Remove Line Button
-  let rmvIng = document.createElement('button');
-  rmvIng.setAttribute('type', 'button');
-  rmvIng.setAttribute('id', 'removeBtn');
-  rmvIng.setAttribute('onclick', 'rmvRow2(this)');
-  rmvIng.setAttribute('class', 'btn btn-outline-danger');
-  rmvIng.innerText = '-';
-  let rmvIngP = document.createElement('td');
-  rmvIngP.appendChild(rmvIng);
-  //Quantity//
-  var qty = document.createElement('td');
-  qty.innerText = String(qtyI) + " " + unit;
-  qty.setAttribute('id', 'qty')
-  //Ingredient//
-  var ing = document.createElement('td');
-  ing.innerText = String(ingr);
-  //Row Number//
-  var rowNum = document.createElement('th');
-  rowNum.innerText = document.getElementById('mstrTbl').children.length;
-  //Create Row//
-  var ingredient = document.createElement('tr')
-  ingredient.setAttribute('id', 'masteringredient');
-  //Combine Cells//
-  ingredient.appendChild(rowNum);
-  ingredient.appendChild(ing);
-  ingredient.appendChild(qty);
-  ingredient.appendChild(rmvIngP);
-  mstrTbl.appendChild(ingredient); */
+  let tabTblB = ``
+  for (let i = 0; i < currentIngs.length; i++) {
+    tabTblB += `<th>${i+1}</th>
+        <td>${currentIngs[i]}</td>
+        <td id="qty">${currentQty[i]} ${currentUnit[i]}</td>
+        <td><button type="button" id="removeBtn" onclick="rmvRow3(this)" class="btn btn-outline-danger">-</button></td>
+        </tr>`
+  };
+  let tabTblF = `</tbody>
+        </table>
+        </div>`
+  let tabTbl = tabTblH + tabTblB + tabTblF
+  $('.tab-content').append(tabTbl);
 }
-
 //Multiplies qtys for additional servings
 $("#serveInput").change(function (e) {
   let serves = document.getElementById('serveInput').value;
