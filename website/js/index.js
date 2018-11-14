@@ -124,15 +124,29 @@ function rmvRow(cls) {
 //removes the row from Master List
 function rmvRow2(cls) {
   if (cls.parentNode.parentNode.rowIndex !== null) {
-    var delRowI = cls.parentNode.parentNode.rowIndex;
-    var cnfrm = confirm('Are you sure you want to delete this row?')
+    let delRowI = cls.parentNode.parentNode.rowIndex;
+    const ing = cls.parentNode.parentNode.children[1].innerText
+    let cnfrm = confirm('Are you sure you want to delete this row?')
     if (cnfrm) {
       document.getElementById('masterTbl').deleteRow(delRowI);
     }
-    var mstrTbl = document.getElementById('mstrTbl');
-    var mstrTblCt = mstrTbl.childElementCount;
+    let mstrTbl = document.getElementById('mstrTbl');
+    let mstrTblCt = mstrTbl.childElementCount;
     for (i = 1; i < mstrTblCt; i++) {
       mstrTbl.children[i].children[0].innerText = i;
+    }
+    let tabs = document.getElementById('myTab').childElementCount
+    console.log(tabs)
+    for(let i=0; i < tabs;i++){
+      let tabContent = document.getElementById('tab-content').children[i].children[0].children[1].childElementCount
+      console.log(tabContent)
+      for(let j = 0; j < tabContent-1; j++){
+        if(document.getElementById('tab-content').children[i].children[0].children[1].children[j].children[1].innerText === ing){
+          let delRowJ = document.getElementById('tab-content').children[i].children[0].children[1].children[j].rowIndex-1
+          document.getElementById('tab-content').children[i].children[0].children[1].deleteRow(delRowJ);
+          
+        }
+      }
     }
   }
   //Need to remove child row in tab nav
@@ -146,22 +160,30 @@ function rmvRow3(cls) {
     let qtyu = cls.parentNode.parentNode.children[2].innerText;
     let qtyU = qtyu.split(' ');
     let qty = qtyU[0];
-    console.log(qty);
     let cnfrm = true;
-    if (cnfrm) {
-      document.getElementById(recipeID).deleteRow(delRowI);
-    }
+    if (cnfrm) document.getElementById(recipeID).deleteRow(delRowI);
     let indTbl = document.getElementById(recipeID);
-    let indTblCt = mstrTbl.children[1].childElementCount;
-    for (let i = 0; i < indTblCt; i++) {
-      console.log(i + 1);
-      indTbl.children[1].children[i].children[0].innerText = i + 1;
-    }
-    let mstrIngs = []
+    let indTblCt = indTbl.children[1].childElementCount;
+    for (let i = 0; i < indTblCt; i++) indTbl.children[1].children[i].children[0].innerText = i + 1;
+
     var mstrTbl = document.getElementById('mstrTbl');
     var mstrTblCt = mstrTbl.childElementCount;
     for (let j = 1; j < mstrTblCt; j++) {
-      mstrIngs.push(mstrTbl.children[j].children[1].innerText)
+      if(mstrTbl.children[j].children[1].innerText === ing){
+        let mstrQtyU = mstrTbl.children[j].children[2].innerText.split(" ")
+        let newQty = parseFloat(mstrQtyU[0]) - qty;
+        console.log(newQty);
+        if (newQty <= 0) {
+          let delRowI = mstrTbl.children[j].children[3].children[0].parentNode.parentNode.rowIndex;
+          document.getElementById('masterTbl').deleteRow(delRowI);
+          let mstrTbl = document.getElementById('mstrTbl');
+          let mstrTblCt = mstrTbl.childElementCount;
+          for (i = 1; i < mstrTblCt; i++) {
+            mstrTbl.children[i].children[0].innerText = i;
+          }
+        }else mstrTbl.children[j].children[2].innerText = `${newQty} ${mstrQtyU[1]}`
+        break;
+      }
     }
   }
 }
@@ -211,7 +233,7 @@ $("#addList").click(
     let currentUnit = [];
     for (var i = 1; i < testlnth; i++) {
       let mstrIngs = document.getElementById('mstrTbl').children[i].children[1].innerText;
-      mstrIngs = mstrIngs.substr(0, mstrIngs.length - 1)
+      //mstrIngs = mstrIngs.substr(0, mstrIngs.length - 1)
       let mstrQty = document.getElementById('mstrTbl').children[i].children[2].innerText;
       //Seperating Qty and Unit
       mstrQty = mstrQty.split(" ");
@@ -234,7 +256,7 @@ $("#addList").click(
     indRecipe(recipe, ingredient, quantity, units);
     for (i = 1; i < ings; i++) {
       let varIng = document.getElementById('ingTbl').children[i].children[1].innerText
-      varIng = varIng.substr(0, varIng.length - 1)
+      //varIng = varIng.substr(0, varIng.length - 1)
       if (currentIngs.indexOf(varIng) !== -1) {
         let qty = document.getElementById('ingTbl').children[i].children[2].innerText.split(" ")
         let ind = currentIngs.indexOf(varIng);
@@ -281,7 +303,6 @@ function indRecipe(currentRecipe, currentIngs, currentQty, currentUnit) {
       </thead>
       <tbody id="mstrTbl">
         <tr id="indIngredients">`;
-
   let tabTblB = ``
   for (let i = 0; i < currentIngs.length; i++) {
     tabTblB += `<th>${i+1}</th>
@@ -296,6 +317,7 @@ function indRecipe(currentRecipe, currentIngs, currentQty, currentUnit) {
   let tabTbl = tabTblH + tabTblB + tabTblF
   $('.tab-content').append(tabTbl);
 }
+
 //Multiplies qtys for additional servings
 $("#serveInput").change(function (e) {
   let serves = document.getElementById('serveInput').value;

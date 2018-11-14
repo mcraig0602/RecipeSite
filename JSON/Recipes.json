@@ -75,6 +75,35 @@
       "qty": 1,
       "unit": "tbsp"
     }]
+  },{
+    "name": "Challah_Bread",
+    "ingredients":[{
+      "name": "Active dry yeast",
+      "qty": 0.25,
+      "unit": "oz"
+      },
+      {
+        "name": "Water",
+        "qty": 1,
+        "unit": "cups"
+      },{
+        "name": "Canola Oil",
+        "qty": 0.5,
+        "unit": "cups"
+      },{
+        "name": "White Sugar",
+        "qty": 0.33,
+        "unit": "cups"
+      },{
+        "name": "Salt",
+        "qty": 1,
+        "unit": "tbsp"
+      },{
+        "name": "Whole Eggs",
+        "qty": 5,
+        "unit": "each"
+      }
+    ] 
   }]
 
 }
