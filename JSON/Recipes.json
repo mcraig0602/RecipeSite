@@ -1,109 +1,250 @@
 {
   "name": "Recipes",
-  "recipes": [{
-    "name": "Hot_Chocolate",
-    "ingredients": [{
-        "name": "Chocolate Syrup",
-        "qty": 2,
-        "unit": "floz"
-      },
-      {
-        "name": "Whole Milk",
-        "qty": 6,
-        "unit": "floz"
-      },
-      {
-        "name": "Cocoa Powder",
-        "qty": 1,
-        "unit": "tbsp"
-      }, {
-        "name": "Dark Chocolate",
-        "qty": 2,
-        "unit": "oz"
-      }
-    ]
-  }, {
-    "name": "Mushroom_Risotto",
-    "ingredients": [{
-        "name": "Arborio Rice",
-        "qty": 2,
-        "unit": "cups"
-      },
-      {
-        "name": "Dried Mushrooms",
-        "qty": 1,
-        "unit": "oz"
-      },
-      {
-        "name": "Chicken Stock",
-        "qty": 3,
-        "unit": "cups"
-      }, {
-        "name": "Shallots",
-        "qty": 2,
-        "unit": "oz"
-      }, {
-        "name": "Reisling",
-        "qty": 2,
-        "unit": "floz"
-      }, {
-        "name": "Thyme",
-        "qty": 1,
-        "unit": "tbsp"
-      }
-    ]
-  }, {
-    "name": "Basic_Risotto",
-    "ingredients": [{
-      "name": "Arborio Rice",
-      "qty": 2,
-      "unit": "cups"
-    }, {
-      "name": "Chicken Stock",
-      "qty": 3,
-      "unit": "cups"
-    }, {
-      "name": "Shallots",
-      "qty": 2,
-      "unit": "oz"
-    }, {
-      "name": "Reisling",
-      "qty": 2,
-      "unit": "floz"
-    }, {
-      "name": "Thyme",
-      "qty": 1,
-      "unit": "tbsp"
-    }]
-  },{
-    "name": "Challah_Bread",
-    "ingredients":[{
-      "name": "Active dry yeast",
-      "qty": 0.25,
-      "unit": "oz"
-      },
-      {
-        "name": "Water",
-        "qty": 1,
-        "unit": "cups"
-      },{
-        "name": "Canola Oil",
-        "qty": 0.5,
-        "unit": "cups"
-      },{
-        "name": "White Sugar",
-        "qty": 0.33,
-        "unit": "cups"
-      },{
-        "name": "Salt",
-        "qty": 1,
-        "unit": "tbsp"
-      },{
-        "name": "Whole Eggs",
-        "qty": 5,
-        "unit": "each"
-      }
-    ] 
-  }]
-
+  "recipes": [
+    {
+      "name": "Hot_Chocolate",
+      "ingredients": [
+        {
+          "name": "Chocolate Syrup",
+          "qty": 2,
+          "unit": "floz"
+        },
+        {
+          "name": "Milk, Whole",
+          "qty": 6,
+          "unit": "floz"
+        },
+        {
+          "name": "Cocoa Powder",
+          "qty": 1,
+          "unit": "tbsp"
+        },
+        {
+          "name": "Dark Chocolate",
+          "qty": 2,
+          "unit": "oz"
+        }
+      ]
+    },
+    {
+      "name": "Mushroom_Risotto",
+      "ingredients": [
+        {
+          "name": "Rice, Arborio",
+          "qty": 2,
+          "unit": "cup(dry)"
+        },
+        {
+          "name": "Mushrooms,Dried",
+          "qty": 1,
+          "unit": "oz"
+        },
+        {
+          "name": "Stock, Chicken",
+          "qty": 3,
+          "unit": "cup(wet)"
+        },
+        {
+          "name": "Shallots",
+          "qty": 2,
+          "unit": "oz"
+        },
+        {
+          "name": "Reisling",
+          "qty": 2,
+          "unit": "floz"
+        },
+        {
+          "name": "Thyme",
+          "qty": 1,
+          "unit": "tbsp"
+        }
+      ]
+    },
+    {
+      "name": "Basic_Risotto",
+      "ingredients": [
+        {
+          "name": "Rice, Arborio",
+          "qty": 2,
+          "unit": "cup(dry)"
+        },
+        {
+          "name": "Stock, Chicken",
+          "qty": 3,
+          "unit": "cup(wet)"
+        },
+        {
+          "name": "Shallots",
+          "qty": 2,
+          "unit": "oz"
+        },
+        {
+          "name": "Reisling",
+          "qty": 2,
+          "unit": "floz"
+        },
+        {
+          "name": "Thyme",
+          "qty": 1,
+          "unit": "tbsp"
+        }
+      ]
+    },
+    {
+      "name": "Challah_Bread",
+      "ingredients": [
+        {
+          "name": "Active dry yeast",
+          "qty": 0.25,
+          "unit": "oz"
+        },
+        {
+          "name": "Water",
+          "qty": 1,
+          "unit": "cup(wet)"
+        },
+        {
+          "name": "Oil, Canola",
+          "qty": 0.5,
+          "unit": "cup(wet)"
+        },
+        {
+          "name": "Sugar, White",
+          "qty": 0.33,
+          "unit": "cup(dry)"
+        },
+        {
+          "name": "Salt",
+          "qty": 1,
+          "unit": "tbsp"
+        },
+        {
+          "name": "Whole Eggs",
+          "qty": 5,
+          "unit": "each"
+        }
+      ]
+    },
+    {
+      "name": "Yeast_Rolls",
+      "ingredients": [
+        {
+          "name": "Water",
+          "qty": "2",
+          "unit": "cup(wet)"
+        },
+        {
+          "name": "Active dry yeast",
+          "qty": "0.25",
+          "unit": "oz"
+        },
+        {
+          "name": "Sugar, White",
+          "qty": "2.5",
+          "unit": "tea"
+        },
+        {
+          "name": "Flour, Bread",
+          "qty": "6",
+          "unit": "cup(dry)"
+        },
+        {
+          "name": "Salt",
+          "qty": "1",
+          "unit": "tbsp"
+        },
+        {
+          "name": "Oil, Canola",
+          "qty": "0.66",
+          "unit": "cup(wet)"
+        },
+        {
+          "name": "Butter",
+          "qty": "6",
+          "unit": "tbsp"
+        }
+      ]
+    },
+    {
+      "name": "Mushroom_Chicken",
+      "ingredients": [
+        {
+          "name": "Chicken, Thigh",
+          "qty": "6",
+          "unit": "each"
+        },
+        {
+          "name": "Oil, Olive",
+          "qty": "1",
+          "unit": "tbsp"
+        },
+        {
+          "name": "Garlic",
+          "qty": "6",
+          "unit": "each"
+        },
+        {
+          "name": "Parsley",
+          "qty": "2",
+          "unit": "tbsp"
+        },
+        {
+          "name": "Bacon",
+          "qty": "7",
+          "unit": "oz"
+        },
+        {
+          "name": "Mushroom, Crimini",
+          "qty": "14",
+          "unit": "oz"
+        },
+        {
+          "name": "Heavy Cream",
+          "qty": "1",
+          "unit": "cup(wet)"
+        },
+        {
+          "name": "Stock, Chicken",
+          "qty": "0.5",
+          "unit": "cup(wet)"
+        },
+        {
+          "name": "Cheese, Parmesan",
+          "qty": "0.5",
+          "unit": "cup(dry)"
+        }
+      ]
+    },
+    {
+      "name": "Asparagus_Basic_Risotto",
+      "ingredients": [
+        {
+          "name": "Rice, Arborio",
+          "qty": "2",
+          "unit": "cup(dry)"
+        },
+        {
+          "name": "Stock, Chicken",
+          "qty": "3",
+          "unit": "cup(wet)"
+        },
+        {
+          "name": "Shallots",
+          "qty": "2",
+          "unit": "oz"
+        },
+        {
+          "name": "Reisling",
+          "qty": "2",
+          "unit": "floz"
+        },
+        {
+          "name": "Thyme",
+          "qty": "1",
+          "unit": "tbsp"
+        }
+      ]
+    }
+  ]
 }

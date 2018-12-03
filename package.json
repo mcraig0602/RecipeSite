@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "server": "node server.js",
+    "build": "gulp",
+    "start": "concurrently --kill-others \"npm build\" \"nodemon server\""
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-jade": "^1.1.0",
+    "gulp-minify": "^3.1.0",
     "gulp-pretty-html": "^2.0.9",
     "gulp-sass": "^4.0.2",
     "gulp-watch": "^5.0.1",
